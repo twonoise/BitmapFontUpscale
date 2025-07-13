@@ -167,7 +167,7 @@ void bdf2x_double_bits(char* start)
     else
     {
         for (int j = 0; j < multiplier; j++) {
-            for (int i = 0; i < (multiplier * bbw + 7) / 8; i++) {
+            for (int i = 0; i < (bbw + 7) / 8 * 2; i++) {
                 char c;
                 int err = (c = getchar()); /* Read hex chars from input pipe. */
                 if (err == -1) {
