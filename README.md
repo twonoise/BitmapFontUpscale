@@ -32,7 +32,7 @@ one may note that former allows non-integer upscaling with good guess logic for 
 > [!Note]
 > We will use only integer, 1:N upscale here in our research.
 
-*Smart* _image_ upscale is tricky. It can be possible using bicubic or other non-linear upscaler. I am not found already existing _font_ scalers based on it. I'd have some success with it using my 8-16x supersampling method, but not all chars are good, and almost not useful above 2x upscaling.
+*Smart* **image**upscale is tricky. It can be possible using bicubic or other non-linear upscaler. I am not found already existing **font** scalers based on it. I'd have some success with it using my 8-16x supersampling method, but not all chars are good, and almost not useful above 2x upscaling.
 
 It can be also possible using 1) extraction of outline (which means, and is, bitmap -> outline font conversion), then 2) smoothing angles, then 3) reverse convert back to bitmap. There is:
 
