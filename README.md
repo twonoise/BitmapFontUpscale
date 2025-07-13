@@ -270,6 +270,9 @@ For this scale we'll use our 2x version after final manual touch on it. Flow is 
     compare -compose subtract ter-x24nx4-w-corners-and-lines.png ter-x24nx4-corners-only.png - | magick - -alpha off -threshold 50% ter-x24nx4-pre.png
     magick ter-x24nx4-pre.png -depth 1 -morphology Thinning '9>:-,-,-,-,1,1,1,-,- -,-,-,-,1,1,1,-,- -,-,0,0,1,1,1,-,- -,-,0,0,1,1,1,-,- -,-,0,0,1,1,1,-,- -,-,0,0,0,1,1,-,- -,-,0,0,0,0,1,-,- -,-,0,0,0,0,0,-,- -,-,0,0,0,0,0,-,-' -morphology Thinning '9>:-,-,1,1,1,-,-,-,- -,-,1,1,1,-,-,-,- -,-,1,1,1,0,0,-,- -,-,1,1,1,0,0,-,- -,-,1,1,1,0,0,-,- -,-,1,1,0,0,0,-,- -,-,1,0,0,0,0,-,- -,-,0,0,0,0,0,-,- -,-,0,0,0,0,0,-,-' -morphology Thicken '7>:-,-,1,1,1,1,- -,0,1,1,1,1,- -,0,0,1,1,1,- -,0,0,0,1,1,- -,0,0,0,1,1,- -,0,0,0,1,1,- -,0,0,0,-,1,-' -morphology Thicken '7>:-,1,1,1,1,-,- -,1,1,1,1,0,- -,1,1,1,0,0,- -,1,1,0,0,0,- -,1,1,0,0,0,- -,1,1,0,0,0,- -,1,-,0,0,0,-' ter-x24nx4.png
 
+### Aftertouch of Step Two
+Carefully examine glyphs and hand edit it, in some cases include (block-)copy of char or set of chars from another method of upscaling, like plain upscaling or `magick`'s `-magnify` one.
+
 
 Testing
 =======
