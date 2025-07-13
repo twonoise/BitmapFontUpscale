@@ -168,9 +168,13 @@ I collect here best processing i can obtain with standard tools. This does not m
 
     gegl ter-x24nx1.png -o ter-x24nx2-pre.png -- scale-ratio x=2 y=2 sampler=nearest mean-curvature-blur iterations=1 threshold value=0.35
 
+Most probably this one need (fix "1, 4"-like look, see below).
+
+    magick ter-x18nx2-pre.png -depth 1 -morphology Thicken '7>:-,-,-,-,-,-,- -,-,-,0,-,-,- -,-,0,0,1,1,- -,0,0,0,1,1,- 0,0,1,1,1,1,- 0,1,1,1,1,1,- 1,1,1,0,1,1,-' -morphology Thicken '7>:-,-,-,-,-,-,- -,-,-,0,-,-,- -,1,1,0,0,-,- -,1,1,0,0,0,- -,1,1,1,1,0,0 -,1,1,1,1,1,0 -,1,1,0,1,1,1' ter-x18nx2-pre2.png    
+
 And special powerful spell for 30 degree corners fix.
 
-    magick ter-x24nx2-pre.png -depth 1 -morphology Thinning '7>:-,-,-,1,-,0,- -,0,0,1,1,0,- -,0,0,1,1,0,- -,0,0,1,1,1,- -,0,0,0,1,1,- -,0,0,0,0,1,- -,0,0,0,0,1,-' -morphology Thinning '7>:-,0,-,1,-,-,- -,0,1,1,0,0,- -,0,1,1,0,0,- -,1,1,1,0,0,- -,1,1,0,0,0,- -,1,0,0,0,0,- -,1,0,0,0,0,-' ter-x24nx2.png
+    magick ter-x24nx2-pre2.png -depth 1 -morphology Thinning '7>:-,-,-,1,-,0,- -,0,0,1,1,0,- -,0,0,1,1,0,- -,0,0,1,1,1,- -,0,0,0,1,1,- -,0,0,0,0,1,- -,0,0,0,0,1,-' -morphology Thinning '7>:-,0,-,1,-,-,- -,0,1,1,0,0,- -,0,1,1,0,0,- -,1,1,1,0,0,- -,1,1,0,0,0,- -,1,0,0,0,0,- -,1,0,0,0,0,-' ter-x24nx2.png
 
 ### 3x
 ...is way harder than 2x. Unloke 2x, here is no threshold value exist for both smooth tilted lines but not add corner pixels. How we will fight it?
