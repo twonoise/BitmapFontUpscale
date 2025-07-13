@@ -249,6 +249,7 @@ int main(int argc, char* argv[])
             !strncmp(start, "DWIDTH", n) ||
             !strncmp(start, "BBX", n) ||
             !strncmp(start, "SIZE", n) ||
+            !strncmp(start, "PIXEL_SIZE", n) || /* Added due to Fontforge warning */
             !strncmp(start, "FONTBOUNDINGBOX", n))
         {
             int only_first, is_bbx;
