@@ -19,8 +19,11 @@ But, someone wrongly try to use `.ttf` for matrix displays one day, and this poo
 
 Old desktop operating systems were made by professionals. They were, of course, aware of this problem: their fonts always comes in screen-paper pairs of 1) human-created, guaranteed to be pixel-perfect at any case, bitmap fonts in a number of sizes (or only just this part), plus 2) complementary `.ttf` part, which used for display for larger sizes, and for hardcopy for any size, of letters. This only correct behaviour is mostly lost, or was intentionally thrown away, today. I suspect that newbies are never seen those word processing systems, so just don't know how it should look when correctly made.
 Another reason why `.ttf` fonts are impossibly to be perfectly rendered (here and after, "perfectly" means for matrix display unit, not for paper print, where they are already perfect), are floating point format of their data. Compared with _bitmap_ fonts, and also with another important type, _Hershey_ (aka stroke, or vector, or Borland's .bgi) type: these both are perfect, as they are integer based.
-3rd reason is not excellent quality of most shape-based (`.ttf`) fonts itself: no grid used, at least. _I'm an Artist, that's how I see it! Your boring machines and displays and dpi are not my problem at all!_
+3rd reason is not excellent quality of most shape-based (`.ttf`) fonts itself: no grid used, at least.
 
+> I'm an Artist, that's how I see it! Your boring machines and displays and dpi are not my problem at all! :-[     ]
+
+<br>
 To restore the correct behaviour, we'll need to know there are two problems. One is bitmap font support in modern desktop OS: there will be separate research. Other one is limited set of large bitmap fonts available, and the purpose of this research is to somewhat overcome it.
 
 While there are a number of bitmapped fonts are exist, they are mostly small sized. It is not easy to draw a large bitmap font. And it's very hard (i mean, _really_) to (perfectly) upscale existing one. But, looks like i found some of required spices for our witch's potion cauldron, so we can try now to do some magic. Spells will be (very) different per font, per its style (bold or not) and size, and also per scale ratio. Expected to be hard... but, let's try.
