@@ -9,7 +9,7 @@ There are matrix (pixel) based screen displays are extremely widely used today; 
 One may also note that screen display resolution in pixels increases with years.
 This leads to increasing demand of lagre-sized pixel-precise fonts. The shape (outline) based, or `.ttf`, fonts are can be rendered to bitmap form, but result will never be perfect: it is impossible for machine to know where to place boundary pixels for perfect result, and only human can do that. And when `.ttf` are used for what they supposed to, paper printing, this imperfection never noticeable for human eye, as 300 dpi printers were readily available at first wave of `.ttf`s arrival. 
 
-But, someone wrongly try to use `.ttf` for matrix displays one day, and this poor practice becomes treated as normal thing by many new or non-experienced desktop users, so becomes widely spreaded today. Insane amount of human power then was consumed last half of century during countless tries to make _hinting_ and _antialiasing_ pseudo-perfection technologies to make use `.ttf` for matrix displays more "perfect". With respect to these brave people, but really no even one bit of success there, as _this_ is theoretically impossible for machine <sup>[Note]</sup>. Only loss, because antialiasing, and especially RGB subpixeling version of it, is bad for screenshots for web articles, for editing, printed copies; screen reading (recognizing of chars when cursor copy not work); LED panels; industrial (low DPI) label printingж e-paper displays. And this becomes even worse for small sized fonts. CPU time and RAM usage also rarely benefits from that.
+But, someone wrongly try to use `.ttf` for matrix displays one day, and this poor practice becomes treated as normal thing by many new or non-experienced desktop users, so becomes widely spreaded today. Insane amount of human power then was consumed last half of century during countless tries to make _hinting_ and _antialiasing_ pseudo-perfection technologies to make use `.ttf` for matrix displays more "perfect". With respect to these brave people, but really no even one bit of success there, as _this_ is theoretically impossible for machine <sup>[Note]</sup>. Only loss, because antialiasing, and especially RGB subpixeling version of it, is bad for screenshots for web articles, for editing, printed copies; screen reading (recognizing of chars when cursor copy not work); LED panels; industrial (low DPI) laminated label printing; e-paper displays; embedded platforms; low power SPI/I2C displays. And this becomes even worse for small sized fonts. CPU time and RAM usage also rarely benefits from that.
 
 > [!Tip]
 > Try to render _any_ symmetrical letter with _any_ popular `.ttf` font and _required_ size, and see if result is perfect.
@@ -110,9 +110,9 @@ But it produces `bmp`s i can't open with any tool. So it was modified to produce
 > One may note that we treat `.pcf` and `.bdf` as same formats. But not `.pcf.gz`: these need fo be unzipped first; no need to gzip it again then, it will work as is.
 
     gcc -o bdf2image bdf2image.c
-    bdf2image ter-x24nx1.pcf
+    bdf2image ter-x24nx1.pcf      # Or original name, ter-x24n.pcf
 
-Note that default gap (guard) will be 2 px. We can't work without gap: it can look overcomplicated to chop-crop-chop sequence below to remove gaps, but gaps are required to work as defined out-of-area (virtual) pixels during our magic upscale math; so should be black, or, to help see boundaries for debug, i use near black.
+Note that default gap (guard or grid) will be **2 px**. We can't work without gap: it can look overcomplicated to chop-crop-chop sequence below to remove gaps, but gaps are required to work as defined out-of-area (virtual) pixels during our magic upscale math; so should be black, or, to help see boundaries for debug, i use near black.
 
 As suggested by `bdf2image`
     magick -size 450x1146 -depth 8 gray:out.raw ter-x24nx1.png
@@ -122,7 +122,7 @@ Step Two (example)
 
     gegl ter-x24nx1.png -o ter-x24nx2.png -- scale-ratio x=2 y=2 sampler=nearest mean-curvature-blur iterations=1 threshold value=0.35
 
-Make few example (not final) manual edits in it.
+Make few example-like (not final) manual edits in it.
 
 Note that we have gap=2, scale=2, our 24 px font is 12x24 sized.
     s=2
