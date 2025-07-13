@@ -5,16 +5,21 @@ Description
 -----------
 
 There are matrix (pixel) based screen displays are extremely widely used today; one may note that it is almost only type of displays produced currently. Vector-based display technologies today are very special and quite expensive.
+
 One may also note that screen display resolution in pixels increases with years.
-This leads to increasing demand of lagre-sized pixel-precise fonts. The shape (outline) based, or `.ttf`, fonts are can be rendered to bitmap form, but result will never be perfect: it is impossible for machine to know where to place boundary pixels for perfect result, and only human can do that. And when `.ttf` are used for what they supposed to, paper printing, this imperfection never noticeable for human eye, as 300 dpi printers were readily available at first wave of `.ttf`s arrival. But, someone wrongly try to use `.ttf` for matrix displays one day, and this poor practice becomes treated as normal thing by many new or non-experienced desktop users, so becomes widely spreaded today. Insane amount of human power then was consumed last half of century during countless tries to make _hinting_ and _antialiasing_ pseudo-perfection technologies to make use `.ttf` for matrix displays more "perfect". With respect to these brave people, but really no even one bit of success there, as _this_ is theoretically impossible for machine (*). Only loss, because antialiasing, and especially RGB subpixeling version of it, is bad for screenshots for web articles, for editing, printed copies; screen reading (recognizing of chars when cursor copy not work); LED panels; industrial (low DPI) label printing, e-paper displays. And this becomes even worse for small sized fonts. CPU time and RAM usage also rarely benefits from that.
+This leads to increasing demand of lagre-sized pixel-precise fonts. The shape (outline) based, or `.ttf`, fonts are can be rendered to bitmap form, but result will never be perfect: it is impossible for machine to know where to place boundary pixels for perfect result, and only human can do that. And when `.ttf` are used for what they supposed to, paper printing, this imperfection never noticeable for human eye, as 300 dpi printers were readily available at first wave of `.ttf`s arrival. 
+
+But, someone wrongly try to use `.ttf` for matrix displays one day, and this poor practice becomes treated as normal thing by many new or non-experienced desktop users, so becomes widely spreaded today. Insane amount of human power then was consumed last half of century during countless tries to make _hinting_ and _antialiasing_ pseudo-perfection technologies to make use `.ttf` for matrix displays more "perfect". With respect to these brave people, but really no even one bit of success there, as _this_ is theoretically impossible for machine <sup>[Note]</sup>. Only loss, because antialiasing, and especially RGB subpixeling version of it, is bad for screenshots for web articles, for editing, printed copies; screen reading (recognizing of chars when cursor copy not work); LED panels; industrial (low DPI) label printingж e-paper displays. And this becomes even worse for small sized fonts. CPU time and RAM usage also rarely benefits from that.
+
 > [!Tip]
 > Try to render _any_ symmetrical letter with _any_ popular `.ttf` font and _required_ size, and see if result is perfect.
 
-(*) That does not mean machines can't generate perfect results at all. This research was created and intended to show they _can_.
+> [!Note]
+> That does not mean machines can't generate perfect results at all. This research was created and intended to show they _can_.
 
 Old desktop operating systems were made by professionals. They were, of course, aware of this problem: their fonts always comes in screen-paper pairs of 1) human-created, guaranteed to be pixel-perfect at any case, bitmap fonts in a number of sizes (or only just this part), plus 2) complementary `.ttf` part, which used for display for larger sizes, and for hardcopy for any size, of letters. This only correct behaviour is mostly lost, or was intentionally thrown away, today. I suspect that newbies are never seen those word processing systems, so just don't know how it should look when correctly made.
 Another reason why `.ttf` fonts are impossibly to be perfectly rendered (here and after, "perfectly" means for matrix display unit, not for paper print, where they are already perfect), are floating point format of their data. Compared with _bitmap_ fonts, and also with another important type, _Hershey_ (aka stroke, or vector, or Borland's .bgi) type: these both are perfect, as they are integer based.
-3rd reason is not excellent quality of most shape-based (`.ttf`) fonts itself: no grid used, at least. I'm an Artist, that's how I see it! Your boring machines and displays and dpi are not my problem at all!
+3rd reason is not excellent quality of most shape-based (`.ttf`) fonts itself: no grid used, at least. _I'm an Artist, that's how I see it! Your boring machines and displays and dpi are not my problem at all!_
 
 To restore the correct behaviour, we'll need to know there are two problems. One is bitmap font support in modern desktop OS: there will be separate research. Other one is limited set of large bitmap fonts available, and the purpose of this research is to somewhat overcome it.
 
@@ -81,7 +86,11 @@ There are two possible approaches.
 
 Per-glyph work can be acceptable for simple, or at least stable, processing chain for all fonts; but as we see at simple example above, it is rarely possible, we will use many different tools. Also, batch processing of small images is (often very much) inefficient. Btw, i've started from that, and spent many time trying to have success with it.
 
-Whole bitmap process is at a glance and very efficient. But there is no tools that allow mentioned prosess chain, because it requires to restore metadata for each glyph, which of course can't be stored in a bitmap. So we will try: 1) render one whole bitmap with all glyphs - there is standard tool(s) for that; 2) process bitmap by hand - steps can't be automated, they are differs per font style, font size, and scaling size, we'd should support all these combinations; 3) reconstruct the font, with the trick: we will use `bdfresize`, but modify it, so it will read our whole resulting bitmap instead of its per-glyph process, thus save all font metadata.
+Whole bitmap process is at a glance and very efficient. But there is no tools that allow mentioned prosess chain, because it requires to restore metadata for each glyph, which of course can't be stored in a bitmap. 
+So we will try:
+1) Render one whole bitmap with all glyphs—there is standard tool(s) for that;
+2) Process bitmap by hand—steps can't be automated, they are differs per font style, font size, and scaling size, we'd should support all these combinations;
+3) Reconstruct the font, with the trick: we will use `bdf2x`, but modify it, so it will read our whole resulting bitmap instead of its per-glyph process, thus save all font metadata.
 
 > [!Note]
 > This workflow tested only for *monospaced* fonts.
