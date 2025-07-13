@@ -277,6 +277,8 @@ For this scale we'll use our 2x version after final manual touch on it. Flow is 
 ### Aftertouch of Step Two
 Carefully examine glyphs and hand edit it, in some cases include (block-)copy of char or set of chars from another method of upscaling, like plain upscaling or `magick`'s `-magnify` one.
 
+To selectively transfer glyphs from one image to another, there is simpler, and what is more important, _precise_ (no accidental skew possible) way than blockcopying. Open two images in GIMP as layers (open one, then `Add layer`). Make most correct image as top layer (drag at `Layers`) and image contains chars to be transfered, as substrate (bottom) layer. `Add alpha channel` on top layer (Right click on it on `Layers`). Then just select required areas and press **`Delete`**. Bottom char(s) will be appeared there. Do not forget to `Image -> Flatten image`.
+
 
 Testing
 =======
