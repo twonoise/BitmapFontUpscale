@@ -273,7 +273,7 @@ For this scale we'll use our 2x version after final manual touch on it. Flow is 
 
 Testing
 =======
-Rename if need and place nef fonts together with original Terminus `.pcf(.gz)` suite, like at `/usr/share/fonts/BDF/`. Then
+Rename if need and place new fonts together with original Terminus `.pcf(.gz)` suite, like at `/usr/share/fonts/BDF/`. Then
 
     fc-cache -fv
 
@@ -282,7 +282,7 @@ Now we should see our new fonts in browser, desktop and other places capable to 
 
 Code
 ====
-We use a large set of standard tools. But we need two extra tools, which are not exist.
+We use a wide set of standard tools. But we need two extra tools, which are not exist.
 
 * `bdf2image`, i've made it from `bdf2bmp` licensed as LICENSE: BSD style.
 * `bdfgrow`, i create it from `bdf2x` licensed as UNLICENSE http://unlicense.org/ . Name changed due to it now support not only 2x upscale, and note that more than 2x zooms are piped input only.
@@ -302,9 +302,4 @@ This research text description is licensed under Creative Commons Attribution 4.
 Included software is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
 
 This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
-
-
-
-
-
 
