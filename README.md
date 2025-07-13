@@ -32,7 +32,7 @@ one may note that former allows non-integer upscaling with good guess logic for 
 > [!Note]
 > We will use only integer, 1:N upscale here in our research.
 
-*Smart* **image**upscale is tricky. It can be possible using bicubic or other non-linear upscaler. I am not found already existing **font** scalers based on it. I'd have some success with it using my 8-16x supersampling method, but not all chars are good, and almost not useful above 2x upscaling.
+*Smart* **image** upscale is tricky. It can be possible using bicubic or other non-linear upscaler. I am not found already existing **font** scalers based on it. I'd have some success with it using my 8-16x supersampling method, but not all chars are good, and almost not useful above 2x upscaling.
 
 It can be also possible using 1) extraction of outline (which means, and is, bitmap -> outline font conversion), then 2) smoothing angles, then 3) reverse convert back to bitmap. There is:
 
@@ -61,7 +61,7 @@ I will omit multiple previous research attempts here (btw, some are can be found
 > [!Note]
 > Btw, `scale-ratio x=2 y=2 sampler=nearest` part here is straight upscaler, available also everywhere else.
 
-Here is key spice for our potion is **M e a n   C u r v a t u r e   f i l t e r**. From some well known image processing tools, only `gegl` (and `gimp` which use it) not only have this filter, but correct implementation of it. <sub>Example of pixel-incorrect one in my tests, is https://github.com/YuanhaoGong/CurvatureFilter.</sub>
+Here is key spice for our potion is  **M e a n   C u r v a t u r e   f i l t e r** . From some well known image processing tools, only `gegl` (and `gimp` which use it) not only have this filter, but correct implementation of it. <sub>Example of pixel-incorrect one in my tests, is https://github.com/YuanhaoGong/CurvatureFilter.</sub>
 One may note that *Mean Curvature filter* have quite different purpose; this makes our work harder, in terms of issues reporting, if any.
 So, use our spell and examine carefully **top half** of result (*thin/small* font). Everything except 30 degree lines seems to be perfect. This gives us a chance that our work can be succeeded. Btw, if we try to adopt this spell for **bottom half** of image, it will be
 
@@ -76,7 +76,7 @@ but it also etch some correct pixels. We'll return to it later. Now it's time an
 Work flow
 =========
 There are two possible approaches.
-* One is per-glyph processing, as bdfresize and others does.
+* One is per-glyph processing, as `bdfresize` and others does.
 * Other is render one whole bitmap with all glyphs, process it, then disassemble the puzzle back to its pieces.
 
 Per-glyph work can be acceptable for simple, or at least stable, processing chain for all fonts; but as we see at simple example above, it is rarely possible, we will use many different tools. Also, batch processing of small images is (often very much) inefficient. Btw, i've started from that, and spent many time trying to have success with it.
