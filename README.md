@@ -115,6 +115,7 @@ But it produces `bmp`s i can't open with any tool. So it was modified to produce
 Note that default gap (guard or grid) will be **2 px**. We can't work without gap: it can look overcomplicated to chop-crop-chop sequence below to remove gaps, but gaps are required to work as defined out-of-area (virtual) pixels during our magic upscale math; so should be black, or, to help see boundaries for debug, i use near black.
 
 As suggested by `bdf2image`
+
     magick -size 450x1146 -depth 8 gray:out.raw ter-x24nx1.png
 
 Step Two (example)
@@ -125,14 +126,18 @@ Step Two (example)
 Make few example-like (not final) manual edits in it.
 
 Note that we have gap=2, scale=2, our 24 px font is 12x24 sized.
-    s=2
-    g=$((2*s))
 
-Test how they looks:
+<details> 
+<summary>[Test how they looks]</summary>
+    
 > [!Warning]
 > Generation of a lot of files!
 
+    s=2
+    g=$((2*s))
     magick ter-x24nx2.png -gravity SouthEast -chop "$g"x"$g" -crop $((12*s+g))x$((24*s+g)) -gravity NorthWest -chop "$g"x"$g" +repage -depth 1 /tmp/ter-x24nx2-%04d.png
+
+</details> 
 
 Step Three
 ----------
@@ -140,8 +145,7 @@ Now try to pack it all back to `.bdf` format. <sub>I can't use binary pipe in co
 
     s=2                        # Scale
     g=$((2*s))                 # Gap (scaled)
-
-    magick ter-x24nx2.png -gravity SouthEast -chop "$g"x"$g" -crop $((12*s+g))x$((24*s+g)) -gravity NorthWest -chop "$g"x"$g" +repage -depth 1 gray:- | xxd -p -c 0 | ./bdfgrow ./ter-x24nx1.pcf > ter-x24nx2.pcf
+    magick ter-x24nx2.png -gravity SouthEast -chop "$g"x"$g" -crop $((12*s+g))x$((24*s+g)) -gravity NorthWest -chop "$g"x"$g" +repage -depth 1 gray:- | xxd -p -c 0 | ./bdfgrow 2 ./ter-x24nx1.pcf > ter-x24nx2.pcf
 
 Try to open it now with `fontforge` or other renderer. We have thus our work flow complete and tested. Note that it is not final font shape, we only test if it all will work here. Btw, what'w wrong with this font? Most notably it is 30 degree lines found at Y or X-like letters. We'll need to fix these, so we use...
 
