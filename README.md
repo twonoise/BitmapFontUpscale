@@ -282,6 +282,12 @@ Carefully examine glyphs and hand edit it, in some cases include (block-)copy of
 
 To selectively transfer glyphs from one image to another, there is simpler, and what is more important, _precise_ (no accidental skew possible) way than blockcopying. Open two images in GIMP as layers (open one, then `Add layer`). Make most correct image as top layer (drag at `Layers`) and image contains chars to be transfered, as substrate (bottom) layer. `Add alpha channel` on top layer (Right click on it on `Layers`). Then just select required areas and press **`Delete`**. Bottom char(s) will be appeared there. Do not forget to `Image -> Flatten image`.
 
+To stretch substrate without chars damage (stretch only gaps) this can be used:
+
+    s=2 ; g=$((2*s)) ; magick ter-x18nx2.png -crop $((10*s+g))x$((18*s+g)) -bordercolor '#202020' -border 0x2 +repage +adjoin /tmp/tmp_%04d.png && montage -mode concatenate -tile 33x /tmp/tmp_*.png out.png
+
+where `-border 0x2` adds 4 px in total.
+
 
 Testing
 =======
