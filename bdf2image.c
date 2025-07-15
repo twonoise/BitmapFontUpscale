@@ -67,6 +67,8 @@ struct boundingbox{
 struct boundingbox font; /* global boundingbox */
 static int chars; /* total number of glyphs in a bdf file */
 static int dwflag = 0; /* device width; only used for proportional-fonts */
+char readFilename[FILENAME_CHARMAX] = "input.bdf";
+char writeFilename[FILENAME_CHARMAX] = "out.raw";
 
 
 
@@ -113,7 +115,7 @@ void writeRawFile(unsigned char *bitmapP, int spacing, int colchar, FILE *bmpP){
 
                 // + sizeof(long)*11 + sizeof(short)*5 + sizeof(char)*4*256;
         printf("  Raw Array filesize = %d bytes\n", (int)(bmpw * bmph));
-        printf("\nNow please run:\n\n  magick -size %dx%d -depth 8 gray:out.raw out.png(jpg, gif...)\n\n", (int)bmpw, (int)bmph);
+        printf("\nNow please run:\n\n  magick -size %dx%d -depth 8 gray:out.raw %s.png(jpg, gif...)\n\n", (int)bmpw, (int)bmph, readFilename);
 
         /*
          * IMAGE DATA array
@@ -465,8 +467,6 @@ void printhelp(void){
 int main(int argc, char *argv[]){
         FILE *readP;
         FILE *writeP;
-        char readFilename[FILENAME_CHARMAX] = "input.bdf";
-        char writeFilename[FILENAME_CHARMAX] = "out.raw";
         int tmp, c;
         unsigned char *bitmapP = NULL; /* address of bitmapAREA */
         int spacing = 2; /* breadth of spacing (default 2) */
